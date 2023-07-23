@@ -1,5 +1,3 @@
-![Screenshot (41)](https://github.com/SANGAAM/Vit-TSProject/assets/96041004/895f9eda-538a-4df1-8adc-5f74f06428fc)
-
-![Screenshot (42)](https://github.com/SANGAAM/Vit-TSProject/assets/96041004/615fe419-db65-41c1-8d8d-57ebea6f3053)
-
-![Screenshot (43)](https://github.com/SANGAAM/Vit-TSProject/assets/96041004/98f53b5e-bd60-407f-ba7d-2af84df9dbe8)
+![Screenshot (44)](https://github.com/SANGAAM/Vit-TSProject/assets/96041004/16629d49-645c-4a13-a00e-96bc1ec7db93)
+![Screenshot (45)](https://github.com/SANGAAM/Vit-TSProject/assets/96041004/fac23839-2bd1-48d4-a202-5616e0802d43)
+![Screenshot (46)](https://github.com/SANGAAM/Vit-TSProject/assets/96041004/4af883e3-8b47-496c-b562-5cc1e7796b09)
