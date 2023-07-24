@@ -47,23 +47,22 @@ const DepartmentList: React.FC = () => {
   const handleToggle = (departmentId: number) => {
     const currentIndex = selectedDepartments.indexOf(departmentId);
     const newSelectedDepartments = [...selectedDepartments];
-
-    if (currentIndex === -1) {
-      newSelectedDepartments.push(departmentId);
-      // If a department is selected, select all its sub-departments
-      const department = departmentsData.find((dep) => dep.id === departmentId);
-      if (department) {
-        department.subDepartments.forEach((subDepartment) => {
-          if (!newSelectedDepartments.includes(subDepartment.id)) {
-            newSelectedDepartments.push(subDepartment.id);
-          }
-        });
-      }
-    } else {
+  
+    // Check if the department is currently selected
+    const isDepartmentSelected = currentIndex !== -1;
+    const department = departmentsData.find((dep) => dep.id === departmentId);
+  
+    if (isDepartmentSelected) {
+      // If the department is currently selected, deselect it
       newSelectedDepartments.splice(currentIndex, 1);
-      // If a department is deselected, deselect all its sub-departments
-      const department = departmentsData.find((dep) => dep.id === departmentId);
-      if (department) {
+  
+      // Check if all sub-departments are selected
+      const areAllSubDepartmentsSelected =
+        department &&
+        department.subDepartments.every((subDep) => newSelectedDepartments.includes(subDep.id));
+  
+      if (areAllSubDepartmentsSelected && department) {
+        // If all sub-departments are selected, deselect them all
         department.subDepartments.forEach((subDepartment) => {
           const subDepIndex = newSelectedDepartments.indexOf(subDepartment.id);
           if (subDepIndex !== -1) {
@@ -71,11 +70,35 @@ const DepartmentList: React.FC = () => {
           }
         });
       }
+    } else {
+      // If the department is not currently selected, select it
+      newSelectedDepartments.push(departmentId);
+  
+      // Select all sub-departments and expand the department
+      if (department) {
+        setOpen(departmentId);
+        department.subDepartments.forEach((subDepartment) => {
+          if (!newSelectedDepartments.includes(subDepartment.id)) {
+            newSelectedDepartments.push(subDepartment.id);
+          }
+        });
+  
+        // Check if all sub-departments are now selected, and if so, select the parent department
+        const areAllSubDepartmentsSelected = department.subDepartments.every((subDep) =>
+          newSelectedDepartments.includes(subDep.id)
+        );
+  
+        if (areAllSubDepartmentsSelected) {
+          newSelectedDepartments.push(departmentId);
+        }
+      }
     }
-
+  
     setSelectedDepartments(newSelectedDepartments);
   };
+  
 
+  
   const handleClick = (departmentId: number) => {
     setOpen((prevOpen) => (prevOpen === departmentId ? null : departmentId));
   };
@@ -90,12 +113,11 @@ const DepartmentList: React.FC = () => {
   return (
     <List
       component="nav"
-      subheader={<ListSubheader component="div">Departments</ListSubheader>}
+      subheader={<ListSubheader component="div" style={{ fontSize: '28px', fontWeight:'bold', color: 'Purple' }}>Departments</ListSubheader>}
     >
       {departmentsData.map((department) => (
         <React.Fragment key={department.id}>
-          <ListItem
-            button
+          <ListItem        
             onClick={() => handleClick(department.id)}
             dense
           >
@@ -107,6 +129,7 @@ const DepartmentList: React.FC = () => {
                   selectedDepartments.includes(subDepartment.id)
                 ) && !isAllSubDepartmentsSelected(department.subDepartments)
               }
+              style={{color:'black'}}
               tabIndex={-1}
               disableRipple
               onChange={() => handleToggle(department.id)}

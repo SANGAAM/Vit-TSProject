@@ -7,7 +7,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import '../styles/FrmPage.css'
+import CSS from 'csstype';
 
 const FormPage: React.FC = () => {
   const history = useNavigate();
@@ -17,6 +17,8 @@ const FormPage: React.FC = () => {
     phone: '',
     email: '',
   });
+
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -35,12 +37,19 @@ const FormPage: React.FC = () => {
     }
   };
 
+  // Styling
+  const h1Styles:CSS.Properties={
+    fontWeight:'bold',
+    color:'Purple',
+    fontFamily:'revert'
+  }
+
   return (
    
     <Container>
       <Grid container spacing={2} justifyContent="center" className="form">
         <Grid item xs={12}>
-          <Typography variant="h4" align="center">User Details Form</Typography>
+          <Typography variant="h4" align="center" style={h1Styles}>User Details Form</Typography>
         </Grid>
         <Grid item xs={12} >
           <TextField
@@ -70,7 +79,7 @@ const FormPage: React.FC = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button variant="contained" color="secondary" onClick={handleSubmit}>
             Submit
           </Button>
         </Grid>
