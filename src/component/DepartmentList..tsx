@@ -112,6 +112,7 @@ const DepartmentList: React.FC = () => {
 
   return (
     <List
+    
       component="nav"
       subheader={<ListSubheader component="div" style={{ fontSize: '28px', fontWeight:'bold', color: 'Purple' }}>Departments</ListSubheader>}
     >
